@@ -1,5 +1,7 @@
 # giphy-prueba
 
+Una aplicación en VueJS que permite hacer búsquedas de GIFs a través de Giphy.
+
 ## Project setup
 ```
 npm install
