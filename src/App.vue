@@ -3,10 +3,35 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <div>{{data}}</div>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+const axios = require('axios');
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      key: 'ZVmtNrQW9I4AaPkNiM88oXRLA5TervL1',
+      keyword: 'cat',
+      data: {},
+    };
+  },
+  beforeMount() {
+    this.getName();
+  },
+  methods: {
+    async getName() {
+      const { data } = await axios.get('http://api.giphy.com/v1/gifs/translate?api_key=ZVmtNrQW9I4AaPkNiM88oXRLA5TervL1&s=cat');
+      this.data = data;
+    },
+  },
+};
+</script>
 
 <style>
 #app {
