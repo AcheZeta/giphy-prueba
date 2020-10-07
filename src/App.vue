@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-      <div>{{data}}</div>
+      <p>{{data}}</p>
     </div>
     <router-view/>
   </div>
@@ -16,18 +16,23 @@ export default {
   name: 'App',
   data() {
     return {
-      key: 'ZVmtNrQW9I4AaPkNiM88oXRLA5TervL1',
-      keyword: 'cat',
-      data: {},
+      key: process.env.VUE_APP_APIKEY,
+      url: process.env.VUE_APP_APIURL,
+      keyword: 'Star Wars',
+      data: [],
     };
   },
   beforeMount() {
     this.getName();
   },
+  mounted() {
+    // eslint-disable-next-line no-console
+    console.log(this.url);
+  },
   methods: {
     async getName() {
-      const { data } = await axios.get('http://api.giphy.com/v1/gifs/translate?api_key=ZVmtNrQW9I4AaPkNiM88oXRLA5TervL1&s=cat');
-      this.data = data;
+      const { data } = await axios.get(`${this.url}api_key=${this.key}`);
+      this.data = data.data;
     },
   },
 };
