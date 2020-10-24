@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <div class="bg-clip-border p-4 border-4 border-dashed border-purple-800 bg-purple-500"></div>
     <!-- Search -->
     <input type="text" name="keyword" v-model="query" @keydown="getGifs">
     <!-- Trending -->
@@ -38,17 +39,13 @@ export default {
         // eslint-disable-next-line no-return-assign
         .then((data) => this.gifdata = data.data);
     },
-    // async getGifs() {
-    //   const { data } = await axios.get(`${this.url}api_key=${this.key}&q=Cat&limit=4`);
-    //   this.gifdata = data.data;
-    //   // eslint-disable-next-line no-console
-    //   console.log(this.keyword);
-    // },
   },
 };
 </script>
 
-<style>
+<style >
+@import "css/tailwind.css";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
