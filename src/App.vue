@@ -4,9 +4,10 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <div class="bg-clip-border p-4 border-4 border-dashed border-purple-800 bg-purple-500"></div>
+    <div ></div>
     <!-- Search -->
-    <input type="text" name="keyword" v-model="query" @keydown="getGifs">
+    <input type="text" name="keyword" v-model="query" @keydown="getGifs"
+    class="border py-2 px-5 text-grey-darkest shadow-inner">
     <!-- Trending -->
     <div v-for="gif in gifdata" :key="gif.id">
       <img :src="gif.images.original.url" :alt="gif.title">
