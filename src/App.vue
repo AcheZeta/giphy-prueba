@@ -4,6 +4,9 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <!-- Search -->
+    <input type="text" name="keyword" v-model="query" @keydown="getGifs">
+    <!-- Trending -->
     <div v-for="gif in gifdata" :key="gif.id">
       <img :src="gif.images.original.url" :alt="gif.title">
     </div>
@@ -12,29 +15,35 @@
 </template>
 
 <script>
-const axios = require('axios');
-
+// const axios = require('axios');
 export default {
   name: 'App',
   data() {
     return {
       key: process.env.VUE_APP_APIKEY,
       url: process.env.VUE_APP_APIURL,
-      keyword: 'Star Wars',
+      query: '',
       gifdata: null,
     };
   },
-  beforeMount() {
-    this.getName();
-  },
+  // beforeMount() {
+  //   this.getGifs();
+  // },
   mounted() {},
   methods: {
-    async getName() {
-      const { data } = await axios.get(`${this.url}api_key=${this.key}`);
-      this.gifdata = data.data;
-      // eslint-disable-next-line no-console
-      console.log(this.gifdata.data);
+    getGifs() {
+      const url = `${this.url}api_key=${this.key}&q=${this.query}&limit=4`;
+      fetch(url)
+        .then((response) => response.json())
+        // eslint-disable-next-line no-return-assign
+        .then((data) => this.gifdata = data.data);
     },
+    // async getGifs() {
+    //   const { data } = await axios.get(`${this.url}api_key=${this.key}&q=Cat&limit=4`);
+    //   this.gifdata = data.data;
+    //   // eslint-disable-next-line no-console
+    //   console.log(this.keyword);
+    // },
   },
 };
 </script>
@@ -47,16 +56,13 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
